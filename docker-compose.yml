@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+
+  psql_db:
+    image: postgres:latest
+    container_name: psql_server_auth
+    ports:
+      - 5435:5432
+    restart: on-failure
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    image: redis:7.0.12
+    ports:
+      - 6379:6379
+
+volumes:
+  database-data:
+
+
+
